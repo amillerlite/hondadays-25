@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>My Demo Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #0f172a;
+            --fg: #e5e7eb;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.2);
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --border: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            background: radial-gradient(circle at top, #1f2937 0, #020617 60%);
+            color: var(--fg);
+            padding: 1.5rem;
+        }
+
+        .shell {
+            width: 100%;
+            max-width: 960px;
+            background: var(--card-bg);
+            border-radius: 1.25rem;
+            border: 1px solid var(--border);
+            box-shadow:
+                0 24px 80px rgba(15, 23, 42, 0.8),
+                0 0 0 1px rgba(15, 23, 42, 0.8);
+            padding: 1.5rem 1.75rem 1.75rem;
+            backdrop-filter: blur(18px);
+        }
+
+        .shell-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+            opacity: 0.9;
+        }
+
+        .dot.red {
+            background: #f97373;
+        }
+
+        .dot.yellow {
+            background: #facc15;
+        }
+
+        .dot.green {
+            background: #4ade80;
+        }
+
+        .title-block {
+            flex: 1;
+            min-width: 0;
+        }
+
+        h1 {
+            font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+            margin: 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .pill {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border-radius: 999px;
+            padding: 0.15rem 0.6rem;
+            border: 1px solid var(--accent-soft);
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        p.subtitle {
+            margin: 0.3rem 0 0;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .video-frame {
+            position: relative;
+            border-radius: 0.85rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #020617;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-color: black;
+        }
+
+        .meta {
+            margin-top: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            flex-wrap: wrap;
+        }
+
+        .meta-left {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .badge {
+            padding: 0.12rem 0.5rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.9);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                "Liberation Mono", "Courier New", monospace;
+            font-size: 0.8rem;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.35rem;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            .shell {
+                padding: 1.1rem 1.1rem 1.3rem;
+            }
+
+            .shell-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="shell">
+        <header class="shell-header">
+            <div class="traffic-lights">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+            <div class="title-block">
+                <h1>
+                    Demo Video
+                    <span class="pill">GitHub Pages</span>
+                </h1>
+                <p class="subtitle">
+                    Hosted directly from this repository using a simple HTML5 video player.
+                </p>
+            </div>
+        </header>
+
+        <section class="video-frame">
+            <!-- IMPORTANT: update src to match your actual file name/path -->
+            <video controls preload="metadata" playsinline>
+                <source src="polar bear rick roll.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="meta">
+            <div class="meta-left">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    <span>MP4 · HTML5 video</span>
+                </div>
+                <span>Served as static content from GitHub Pages.</span>
+            </div>
+            <div>
+                <span>Path:</span>
+                <code>./video.mp4</code>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
