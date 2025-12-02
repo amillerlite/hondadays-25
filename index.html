@@ -124,6 +124,18 @@
             }
         }
 
+        @keyframes zoomSpin {
+            0% {
+                transform: scale(0.1) rotate(0deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(720deg);
+                opacity: 1;
+            }
+        }
+
         .floating-emoji {
             position: fixed;
             font-size: 3rem;
@@ -235,7 +247,7 @@
             background: #000;
             aspect-ratio: 16 / 9;
             margin-bottom: 30px;
-            animation: pulse 2s ease-in-out infinite;
+            animation: zoomSpin 2s ease-out forwards;
         }
 
         video {
@@ -243,38 +255,6 @@
             height: 100%;
             display: block;
             filter: contrast(1.2) saturate(1.3);
-        }
-
-        .chaos-elements {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .chaos-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 15px;
-            border: 3px solid;
-            border-image: linear-gradient(45deg, #ff006e, #00f5ff) 1;
-            animation: float 4s ease-in-out infinite;
-            min-width: 200px;
-            text-align: center;
-        }
-
-        .chaos-box:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .chaos-box:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .chaos-box:nth-child(3) {
-            animation-delay: 1s;
         }
 
         .sparkle {
@@ -331,11 +311,6 @@
             }
         }
 
-        .rotating-border {
-            border: 5px solid;
-            border-image: conic-gradient(from 0deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b, #fb5607, #ff006e) 1;
-            animation: spin 3s linear infinite;
-        }
 
         .meme-text {
             font-family: 'Comic Neue', cursive;
@@ -347,10 +322,6 @@
         @media (max-width: 640px) {
             h1 {
                 font-size: 1.2rem;
-            }
-
-            .chaos-box {
-                min-width: 100%;
             }
         }
     </style>
@@ -379,8 +350,8 @@
             </p>
         </header>
 
-        <div class="video-wrapper rotating-border">
-            <video controls preload="metadata" playsinline>
+        <div class="video-wrapper">
+            <video id="mainVideo" controls preload="metadata" playsinline muted loop>
                 <source src="Sequence 01.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
@@ -389,27 +360,20 @@
             <div class="sparkle" style="top: 80%; left: 30%; animation-delay: 1s;"></div>
             <div class="sparkle" style="top: 30%; left: 70%; animation-delay: 1.5s;"></div>
         </div>
-
-        <div class="chaos-elements">
-            <div class="chaos-box">
-                <div class="meme-text rainbow-text">SHEESH</div>
-                <p>MP4 · HTML5 video</p>
-                <p style="font-size: 2rem; margin-top: 10px;">🎬</p>
-            </div>
-            <div class="chaos-box">
-                <div class="meme-text rainbow-text">BUSSIN</div>
-                <p>Static content</p>
-                <p style="font-size: 2rem; margin-top: 10px;">💪</p>
-            </div>
-            <div class="chaos-box">
-                <div class="meme-text rainbow-text">SLAPS</div>
-                <p>Path: Sequence 01.mp4</p>
-                <p style="font-size: 2rem; margin-top: 10px;">🔥</p>
-            </div>
-        </div>
     </div>
 
     <script>
+        // Wait for zoom spin animation to complete, then autoplay video
+        const video = document.getElementById('mainVideo');
+        const videoWrapper = document.querySelector('.video-wrapper');
+
+        // Wait for animation to complete (2 seconds)
+        setTimeout(() => {
+            video.play().catch(err => {
+                console.log('Autoplay prevented:', err);
+            });
+        }, 2000);
+
         // Add more chaos with random sparkles
         function createSparkle() {
             const sparkle = document.createElement('div');
