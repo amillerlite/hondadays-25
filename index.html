@@ -351,7 +351,7 @@
         </header>
 
         <div class="video-wrapper">
-            <video id="mainVideo" controls preload="metadata" playsinline loop>
+            <video id="mainVideo" controls preload="metadata" playsinline muted loop>
                 <source src="Sequence 01.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
@@ -369,9 +369,15 @@
 
         // Wait for animation to complete (2 seconds)
         setTimeout(() => {
-            video.muted = false;
+            // Start muted to allow autoplay (browsers block unmuted autoplay)
+            video.muted = true;
             video.volume = 1.0;
-            video.play().catch(err => {
+            video.play().then(() => {
+                // Once playing, unmute it
+                setTimeout(() => {
+                    video.muted = false;
+                }, 100);
+            }).catch(err => {
                 console.log('Autoplay prevented:', err);
             });
         }, 2000);
